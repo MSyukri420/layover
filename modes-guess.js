@@ -17,6 +17,7 @@ function score(guess, answer) {
 const CLUE_HELP = [
   'After each guess the windows show how close you were.',
   'Orange: right letter, right spot. Blue ring: in the word, wrong spot. Dim: not in the word.',
+  'Stuck? Tap the bulb once per round to reveal a letter you haven’t tried yet. It stays outlined on the keyboard.',
 ];
 
 function guessGame(ctx, o) {
@@ -54,6 +55,27 @@ function guessGame(ctx, o) {
   };
   ctx.keys = press;
   const kb = keyboard(ctx.root, press, o.layout, o.layout ? 'num' : '');
+
+  /* One clue per round: a character from an unsolved answer that no guess has used. */
+  const clueText = c => {
+    const shown = c.toUpperCase();
+    if (n > 1) return `${shown} is in an unsolved word`;
+    return `The ${o.layout ? 'sum' : 'word'} has ${shown}`;
+  };
+  function giveClue() {
+    if (ctx.ended || busy) return;
+    if (s.clue) return toast(clueText(s.clue));
+    const tried = new Set(s.guesses.join(''));
+    const unsolved = s.answers.filter((_, i) => solvedAt(i) === Infinity);
+    const left = [...new Set(unsolved.join(''))].filter(c => !tried.has(c));
+    if (!left.length) return toast('You’ve tried every letter in it');
+    s.clue = pick(left);
+    if (!o.speed) ctx.save(s);
+    paintKeys();
+    toast(clueText(s.clue));
+  }
+  ctx.clue = giveClue;
+  $('clueBtn').hidden = false;
 
   function tileRow(guess, answer, typing, flip) {
     const row = el('div', 't-row');
@@ -105,7 +127,9 @@ function guessGame(ctx, o) {
         });
       }
     });
+    if (s.clue && !seen[s.clue]) seen[s.clue] = 'hint';
     kb.paint(seen);
+    $('clueBtn').classList.toggle('used', !!s.clue);
   }
 
   function shake() {
@@ -263,7 +287,8 @@ function newEquation() {
 reg({
   id: 'equation', group: 'Colour clues', name: 'Equation', blurb: 'Crack the hidden 8-character sum',
   help: ['Find the hidden sum in six guesses, for example 12+35=47. Every guess must be a true sum.',
-    'Orange: right spot. Blue ring: in the sum, wrong spot. Dim: not in the sum. * means times and / means divide, and they happen before + and -.'],
+    'Orange: right spot. Blue ring: in the sum, wrong spot. Dim: not in the sum. * means times and / means divide, and they happen before + and -.',
+    'Stuck? Tap the bulb once per round to reveal a character you haven’t tried yet.'],
   run: ctx => guessGame(ctx, {
     len: 8, tries: 6, chars: /^[0-9+\-*/=]$/, check: checkEquation,
     layout: ['12345', '67890', '+-*/=', '><'], answers: () => [newEquation()],

@@ -81,6 +81,7 @@ $('favBtn').addEventListener('click', () => {
   toast(toggleFav(id) ? 'Bookmarked' : 'Bookmark removed');
   paintFav(id);
 });
+$('clueBtn').addEventListener('click', () => { if (ctxNow && ctxNow.clue) ctxNow.clue(); });
 $('backBtn').addEventListener('click', goHome);
 $('helpBtn').addEventListener('click', showHelp);
 $('statsBtn').addEventListener('click', showStats);

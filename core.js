@@ -103,7 +103,7 @@ function keyboard(parent, press, layout = QWERTY, cls = '') {
   return {
     paint(map) {
       kb.querySelectorAll('.key').forEach(k => {
-        k.classList.remove('correct', 'present', 'absent');
+        k.classList.remove('correct', 'present', 'absent', 'hint');
         if (map[k.dataset.key]) k.classList.add(map[k.dataset.key]);
       });
     },
@@ -208,6 +208,7 @@ function record(id, o) {
 function leave() {
   if (!ctxNow) return;
   ctxNow.stop();
+  $('toast').classList.remove('show');
   ctxNow = null;
 }
 
@@ -247,6 +248,8 @@ function openMode(id, fresh) {
   $('screen').hidden = false;
   $('title').textContent = m.name;
   paintFav(id);
+  $('clueBtn').hidden = true;
+  $('clueBtn').classList.remove('used');
   m.run(ctx);
   if (!store.get('layover.seen.' + id, false)) {
     store.set('layover.seen.' + id, true);

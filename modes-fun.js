@@ -17,7 +17,7 @@ reg({
       do { sun = [rint(n), rint(n)]; } while (snake.some(p => p[0] === sun[0] && p[1] === sun[1]));
     };
     function draw() {
-      g.fillStyle = '#0d1630';
+      g.fillStyle = '#161617';
       g.fillRect(0, 0, px, px);
       g.fillStyle = '#ffb347';
       g.beginPath();

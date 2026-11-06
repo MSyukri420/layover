@@ -97,11 +97,11 @@ function drawGlobe(g, size, view, colours) {
   g.save();
   g.beginPath();
   g.arc(cx, cy, R, 0, Math.PI * 2);
-  g.fillStyle = '#101d44';
+  g.fillStyle = '#1c1c1f';
   g.fill();
   g.clip();
 
-  g.strokeStyle = 'rgba(154,166,199,.14)';
+  g.strokeStyle = 'rgba(200,200,205,.12)';
   g.lineWidth = 1;
   for (let lon = -180; lon < 180; lon += 30) {
     g.beginPath();
@@ -126,9 +126,9 @@ function drawGlobe(g, size, view, colours) {
       g.closePath();
     }
     if (!any) continue;
-    g.fillStyle = colours[c.name] || '#34436f';
+    g.fillStyle = colours[c.name] || '#4a4a4f';
     g.fill('evenodd');
-    g.strokeStyle = 'rgba(13,22,48,.75)';
+    g.strokeStyle = 'rgba(22,22,23,.75)';
     g.lineWidth = 1;
     g.stroke();
   }

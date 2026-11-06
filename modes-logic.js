@@ -122,6 +122,7 @@ reg({
     ctx.root.append(top);
     const { grid, cells } = makeGrid(ctx.root, n);
     const [modeBtn] = newBtns(ctx.root, 'Mode: Open');
+    grid.classList.add('mines');
     const nbrs = i => {
       const r = Math.floor(i / n), c = i % n, out = [];
       for (let a = r - 1; a <= r + 1; a++) {
@@ -639,10 +640,10 @@ reg({
     const { grid, cells } = makeGrid(ctx.root, n, (d, r, c) => {
       const here = s.region[r * n + c];
       d.style.background = COLOURS[here];
-      d.style.color = '#0d1630';
+      d.style.color = '#161617';
       const edge = [];
-      if (c < n - 1 && s.region[r * n + c + 1] !== here) edge.push('inset -2px 0 0 #0d1630');
-      if (r < n - 1 && s.region[(r + 1) * n + c] !== here) edge.push('inset 0 -2px 0 #0d1630');
+      if (c < n - 1 && s.region[r * n + c + 1] !== here) edge.push('inset -2px 0 0 #161617');
+      if (r < n - 1 && s.region[(r + 1) * n + c] !== here) edge.push('inset 0 -2px 0 #161617');
       d.style.boxShadow = edge.join(',');
     });
     const flat = cells.flat();
