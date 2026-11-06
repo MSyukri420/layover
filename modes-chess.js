@@ -5,7 +5,7 @@ reg({
   id: 'chess', group: 'Logic puzzles', name: 'Chess Clues', blurb: 'Find the winning moves in six attempts',
   help: [
     'Play the winning line, then tap Submit. Your opponent replies between your moves. Tap a piece then a square, or drag it.',
-    'Orange: right piece, right square. Blue ring: right piece, wrong square. Violet: right square, wrong piece. Dim: neither.',
+    'Orange: right piece, right square. Green: right piece, wrong square. Violet: right square, wrong piece. Dim: neither.',
     'A different checkmate also wins. You get six attempts. Pawns promote to queens.',
   ],
   run(ctx) {

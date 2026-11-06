@@ -15,8 +15,8 @@ function score(guess, answer) {
 }
 
 const CLUE_HELP = [
-  'After each guess the windows show how close you were.',
-  'Orange: right letter, right spot. Blue ring: in the word, wrong spot. Dim: not in the word.',
+  'After each guess the tiles show how close you were.',
+  'Orange: right letter, right spot. Green: in the word, wrong spot. Dim: not in the word.',
   'Stuck? Tap the bulb once per round to reveal a letter you haven’t tried yet. It stays outlined on the keyboard.',
 ];
 
@@ -287,7 +287,7 @@ function newEquation() {
 reg({
   id: 'equation', group: 'Colour clues', name: 'Equation', blurb: 'Crack the hidden 8-character sum',
   help: ['Find the hidden sum in six guesses, for example 12+35=47. Every guess must be a true sum.',
-    'Orange: right spot. Blue ring: in the sum, wrong spot. Dim: not in the sum. * means times and / means divide, and they happen before + and -.',
+    'Orange: right spot. Green: in the sum, wrong spot. Dim: not in the sum. * means times and / means divide, and they happen before + and -.',
     'Stuck? Tap the bulb once per round to reveal a character you haven’t tried yet.'],
   run: ctx => guessGame(ctx, {
     len: 8, tries: 6, chars: /^[0-9+\-*/=]$/, check: checkEquation,

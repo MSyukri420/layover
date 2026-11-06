@@ -1,4 +1,4 @@
-const CACHE = 'layover-v5';
+const CACHE = 'layover-v7';
 const FILES = ['./', 'index.html', 'styles.css', 'words.js', 'world.js', 'core.js', 'modes-guess.js',
   'modes-word.js', 'modes-logic.js', 'modes-fun.js', 'geo.js', 'chess-data.js', 'chess.js', 'modes-chess.js', 'modes-globe.js', 'boot.js', 'manifest.webmanifest',
   'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png'];
